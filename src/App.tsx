@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Register from "./pages/Register";
+import CoachRegister from "./pages/CoachRegister";
+import CoachLogin from "./pages/CoachLogin";
+import Home from "./pages/Home";
+import StudentLogin from "./pages/StudentLogin";
+import CoachDashboard from "./pages/CoachDashboard";
+import CoachManageStudents from "./pages/CoachManageStudents";
+import CoachManageHabits from "./pages/CoachManageHabits";
+import CoachHabits from "./pages/CoachHabits";
+import StudentHabits from "./pages/StudentHabits";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/student/register" element={<Register />} />
+        <Route path="/student/login" element={<StudentLogin />} />
+        <Route path="/coach/register" element={<CoachRegister />} />
+        <Route path="/coach/login" element={<CoachLogin />} />
+        <Route path="/coach/dashboard" element={<CoachDashboard />} />
+        <Route path="/coach/students" element={<CoachManageStudents />} />
+        <Route path="/coach/habits" element={<CoachManageHabits />} />
+        <Route path="/coach/habits" element={<CoachHabits />} />
+        <Route path="/student/habits" element={<StudentHabits />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

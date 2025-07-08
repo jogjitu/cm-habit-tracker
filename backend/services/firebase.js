@@ -1,9 +1,16 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("../firebase-service-account.json");
+const path = process.env.FIREBASE_TEST_KEY || "../firebase-service-account.json";
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+if (!admin.apps.length) {
+  try {
+    const serviceAccount = require(path);
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+  } catch (err) {
+    console.error("🔥 Failed to load Firebase credentials:", err);
+  }
+}
 
 const db = admin.firestore();
 module.exports = { admin, db };
